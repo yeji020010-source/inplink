@@ -1,0 +1,4 @@
+# 모든 PR에 저장소 관리자가 리뷰어로 자동 지정됩니다.
+# 팀원별로 담당 영역을 나누려면 아래처럼 추가하세요.
+#   /src/components/landing/Hero.tsx  @팀원아이디
+*  @yeji020010-source
