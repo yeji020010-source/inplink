@@ -36,6 +36,9 @@ export function LandingProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 언어는 마운트 후에만 알 수 있음
     if (navigator.language?.startsWith("ja")) setLangState("ja");
+    const q = new URLSearchParams(location.search);
+    if (q.get("lang") === "ja" || q.get("lang") === "ko") setLangState(q.get("lang") as Lang);
+    if (q.get("role") === "influencer") setRole("influencer");
   }, []);
 
   useEffect(() => {

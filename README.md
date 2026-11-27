@@ -2,7 +2,8 @@
 
 브랜드 × 인플루언서 매칭 서비스의 사전 신청 랜딩페이지와 프로토타입입니다. (화면 속 서비스명 `PICKLY`는 임시 이름)
 
-- **`/`**: 사전 신청 랜딩페이지 (한국어/일본어, 신청 폼, 샘플 게시물 하트·투표, 섹션 도달 지표)
+- **`/`**: 홈. 대표 캠페인 캐러셀, 카테고리, 체험 카드 목록, 하단 고정 CTA (캠페인은 예시 데이터)
+- **`/apply`**: 사전 신청 페이지 (한국어/일본어, 신청 폼, 샘플 게시물 하트·투표, 섹션 도달 지표). `?role=influencer&lang=ja`로 탭·언어 지정
 - **`/app`**: 브랜드 ↔ 인플루언서 매칭 프로토타입 (데이터는 브라우저 localStorage에만 저장)
 
 Next.js (App Router) + TypeScript + pnpm
@@ -24,17 +25,23 @@ src/
   app/
     layout.tsx            공통 레이아웃·메타데이터
     globals.css           공통 디자인 토큰(색상·그라데이션), 폼 기본 스타일
-    page.tsx              랜딩페이지. 섹션 순서는 여기서 조정
+    page.tsx              홈(/)
+    apply/page.tsx        사전 신청(/apply). 섹션 순서는 여기서 조정
     app/page.tsx          /app 프로토타입
   components/
-    landing/              랜딩 섹션 하나당 파일 하나
+    home/                 홈 섹션 하나당 파일 하나
+      HomePage.tsx        섹션 순서 조정
+      HomeHeader, FeaturedCarousel, CategoryGrid, CampaignGrid, CampaignCard,
+      Steps, BrandBanner, HomeFooter, StickyCta, home.module.css
+    landing/              사전 신청 섹션 하나당 파일 하나
       Header, Hero, HowItWorks, Benefits, SamplePosts, ApplyForm, Faq, Footer
       Section.tsx         섹션 공통 래퍼 (view_<id> 이벤트 자동 기록)
       LandingProvider.tsx 언어·역할 상태, track()
       landing.module.css
     app/                  /app 프로토타입
   lib/
-    i18n/landing.ts       랜딩 문구 (ko/ja)
+    i18n/home.ts          홈 문구 + 예시 캠페인 데이터 (ko/ja)
+    i18n/landing.ts       사전 신청 문구 (ko/ja)
     i18n/app.ts           프로토타입 문구 (ko/ja)
     track.ts              신청·이벤트 전송
     store.ts              프로토타입용 localStorage 저장소
