@@ -2,7 +2,7 @@
 
 브랜드 × 인플루언서 매칭 서비스의 사전 신청 랜딩페이지와 프로토타입입니다. (화면 속 서비스명 `PICKLY`는 임시 이름)
 
-- **`/`**: 홈. 대표 캠페인 캐러셀, 카테고리, 체험 카드 목록, 하단 고정 CTA (캠페인은 예시 데이터)
+- **`/`**: 홈 (Apple 스타일). 대표 캠페인 갤러리, 카테고리 필터, 체험 카드, 이용 방법, 브랜드 안내. 내비의 '신청하기' 버튼이 항상 보임 (캠페인은 예시 데이터)
 - **`/apply`**: 사전 신청 페이지 (한국어/일본어, 신청 폼, 샘플 게시물 하트·투표, 섹션 도달 지표). `?role=influencer&lang=ja`로 탭·언어 지정
 - **`/app`**: 브랜드 ↔ 인플루언서 매칭 프로토타입 (데이터는 브라우저 localStorage에만 저장)
 
@@ -31,8 +31,11 @@ src/
   components/
     home/                 홈 섹션 하나당 파일 하나
       HomePage.tsx        섹션 순서 조정
-      HomeHeader, FeaturedCarousel, CategoryGrid, CampaignGrid, CampaignCard,
-      Steps, BrandBanner, HomeFooter, StickyCta, home.module.css
+      HomeNav, Hero, Showcase, CampaignSection, CampaignCard,
+      HowItWorks, BrandSection, HomeFooter
+      icons.tsx           SVG 아이콘 (이모지 대신)
+      ProductArt.tsx      예시 제품 일러스트 (실제 사진이 생기면 교체)
+      home.module.css     디자인 토큰(라이트/다크)과 스타일
     landing/              사전 신청 섹션 하나당 파일 하나
       Header, Hero, HowItWorks, Benefits, SamplePosts, ApplyForm, Faq, Footer
       Section.tsx         섹션 공통 래퍼 (view_<id> 이벤트 자동 기록)

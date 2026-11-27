@@ -1,26 +1,36 @@
-"use client";
-
+import Link from "next/link";
 import s from "./home.module.css";
 import type { HomeDict } from "@/lib/i18n/home";
+import type { Lang } from "@/lib/i18n/landing";
 
-export function HomeFooter({ d }: { d: HomeDict }) {
+/** 푸터 링크 대상 (cols 순서와 같음). 아직 없는 페이지(약관 등)는 null → 텍스트로만 표시 */
+const hrefs = (lang: Lang): (string | null)[][] => [
+  ["#campaigns", "#how", "#brands"],
+  [`/apply?role=influencer&lang=${lang}`, `/apply?role=brand&lang=${lang}`],
+  [`/apply?lang=${lang}#faq`, null, null],
+];
+
+export function HomeFooter({ d, lang }: { d: HomeDict; lang: Lang }) {
+  const map = hrefs(lang);
   return (
     <footer className={s.footer}>
-      <h3 className={s.footHead}>{d.snsT}</h3>
-      <div className={s.snsRow}>
-        <span className={`${s.snsBig} ${s.snsIg}`}>IG</span>
-        <span className={`${s.snsBig} ${s.snsX}`}>𝕏</span>
-        <span className={`${s.snsBig} ${s.snsLine}`}>LINE</span>
+      <div className={s.footerInner}>
+        <p className={s.footNote}>{d.footer.note}</p>
+        <div className={s.footCols}>
+          {d.footer.cols.map(([head, items], ci) => (
+            <div key={head}>
+              <h3>{head}</h3>
+              <ul>
+                {items.map((label, li) => {
+                  const href = map[ci]?.[li];
+                  return <li key={label}>{href ? <Link href={href}>{label}</Link> : <span>{label}</span>}</li>;
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p className={s.copy}>{d.footer.copy}</p>
       </div>
-      <ul className={s.footLinks}>
-        {d.links.map((l) => (
-          <li key={l}>{l}</li>
-        ))}
-      </ul>
-      <p className={s.copy}>{d.foot}</p>
-      <button className={s.toTop} aria-label={d.toTop} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-        ↑
-      </button>
     </footer>
   );
 }
