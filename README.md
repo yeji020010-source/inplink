@@ -44,12 +44,12 @@ scripts/
 
 **문구 수정**은 `src/lib/i18n/*.ts`에서 ko와 ja를 같이 고치면 됩니다. 폼의 선택값은 언어와 관계없이 한국어 값으로 저장됩니다.
 
-## 협업 규칙
+## 협업
 
-1. `main`에 직접 push하지 않고 브랜치를 만들어 작업합니다. 예: `feat/hero-copy`, `fix/form-validation`
-2. PR을 올리면 Vercel이 미리보기 URL을 만들어 줍니다. 리뷰어는 그 URL에서 확인합니다.
-3. 섹션이 파일별로 나뉘어 있으니 가능하면 담당 섹션을 나눠 충돌을 줄입니다.
-4. PR 전에 `pnpm lint && pnpm build`를 통과시킵니다.
+브랜치 → PR → CI·Vercel 미리보기 확인 → 리뷰 후 병합. 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md)를 보세요.
+
+- 운영: https://inplink.vercel.app
+- `main`은 보호 브랜치라 PR로만 변경됩니다.
 
 ## Google Sheets 연결 (약 5분)
 

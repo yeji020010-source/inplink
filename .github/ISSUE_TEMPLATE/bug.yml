@@ -1,0 +1,18 @@
+name: 버그
+description: 잘못 동작하거나 깨져 보이는 부분
+labels: ["bug"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: 페이지 URL
+      placeholder: https://inplink.vercel.app/...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 어떤 문제인가요?
+      description: 재현 방법, 기대한 동작, 실제 동작, 기기·브라우저를 적어 주세요. 스크린샷 환영!
+    validations:
+      required: true
