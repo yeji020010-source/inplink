@@ -2,28 +2,25 @@ import Link from "next/link";
 import s from "./home.module.css";
 import type { HomeDict } from "@/lib/i18n/home";
 import type { Lang } from "@/lib/i18n/landing";
-import { ChevronRight } from "./icons";
-import { ProductArt } from "./ProductArt";
+import { Photo } from "./Photo";
 
 export function Hero({ d, lang }: { d: HomeDict; lang: Lang }) {
   return (
     <section className={s.hero}>
-      <p className={s.eyebrow}>{d.hero.eyebrow}</p>
-      <h1 className={s.heroTitle}>{d.hero.h1}</h1>
-      <p className={s.heroSub}>{d.hero.sub}</p>
-      <div className={s.heroActions}>
-        <Link href={`/apply?role=influencer&lang=${lang}`} className={s.pill}>
-          {d.hero.primary}
-        </Link>
-        <Link href={`/apply?role=brand&lang=${lang}`} className={s.textLink}>
-          {d.hero.secondary}
-          <ChevronRight width={16} height={16} />
-        </Link>
-      </div>
-      <div className={s.heroStage} aria-hidden="true">
-        <ProductArt shape="mist" className={s.heroArtSide} />
-        <ProductArt shape="pump" className={s.heroArtMain} />
-        <ProductArt shape="lip" className={s.heroArtSide} />
+      <Photo id="hero-wide" fallback="box" alt="" priority sizes="100vw" className={s.heroPhotoWide} />
+      <Photo id="hero-tall" fallback="box" alt="" priority sizes="100vw" className={s.heroPhotoTall} />
+      <div className={s.heroText}>
+        <p className={s.eyebrow}>{d.hero.eyebrow}</p>
+        <h1 className={s.heroTitle}>{d.hero.h1}</h1>
+        <p className={s.heroSub}>{d.hero.sub}</p>
+        <div className={s.heroActions}>
+          <Link href={`/apply?role=influencer&lang=${lang}`} className={s.btnSolid}>
+            {d.hero.primary}
+          </Link>
+          <Link href={`/apply?role=brand&lang=${lang}`} className={s.btnLine}>
+            {d.hero.secondary}
+          </Link>
+        </div>
       </div>
     </section>
   );

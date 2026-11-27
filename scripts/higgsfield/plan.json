@@ -1,0 +1,35 @@
+{
+  "style": "Quiet Japanese lifestyle photography, soft diffused natural window light, off-white linen, light oak wood, kraft paper, unbleached cotton, muted beige and warm grey palette, generous negative space, matte textures, calm and minimal, 35mm film look with fine grain. Products are plain and unlabeled: no logos, no text, no brand names, no packaging graphics.",
+  "images": [
+    { "id": "hero-wide", "aspect_ratio": "16:9", "use": "web hero (desktop)",
+      "prompt": "A kraft paper box being opened on a light oak table, inside sit a plain white cream jar and a small frosted glass bottle nested in crinkled paper, a folded linen cloth beside it, morning light from the left." },
+    { "id": "hero-tall", "aspect_ratio": "3:4", "use": "web hero (mobile), carousel slide 1",
+      "prompt": "Top-down view of an opened kraft paper box on a light oak table, a plain white cream jar, a frosted glass bottle and a wooden spoon resting on crinkled paper, linen cloth, soft shadows." },
+    { "id": "cat-beauty", "aspect_ratio": "3:4", "use": "beauty campaign cards, carousel slide 3",
+      "prompt": "A plain white pump bottle and an unlabeled cream jar standing on folded off-white linen by a window, a sprig of dried grass in a small ceramic vase, gentle morning light." },
+    { "id": "cat-food", "aspect_ratio": "3:4", "use": "food campaign cards",
+      "prompt": "A plain kraft cookie box with handmade butter cookies on a light oak tray, a ceramic cup of tea, linen napkin, warm afternoon light." },
+    { "id": "cat-lifestyle", "aspect_ratio": "3:4", "use": "lifestyle campaign cards",
+      "prompt": "A plain soy candle in a clear glass beside a small ceramic dish and a stack of linen towels on a light oak shelf, soft side light." },
+    { "id": "step-apply", "aspect_ratio": "3:4", "use": "how-it-works step 1",
+      "prompt": "Hands holding a smartphone with a blank light screen above an oak desk with an open notebook and a pencil, soft daylight, shallow depth of field." },
+    { "id": "step-receive", "aspect_ratio": "3:4", "use": "how-it-works step 2, carousel slide 2",
+      "prompt": "Two hands receiving a small kraft parcel tied with natural cotton string at a pale wooden doorway, soft daylight, unbleached cotton sleeve." },
+    { "id": "step-post", "aspect_ratio": "3:4", "use": "how-it-works step 3, carousel slide 4",
+      "prompt": "Overhead flat lay: a hand photographs a plain white bottle on linen with a smartphone, a ceramic cup and a folded cotton cloth nearby, calm natural light." },
+    { "id": "brand-wide", "aspect_ratio": "16:9", "use": "brand section",
+      "prompt": "A quiet minimal shop interior with a light oak shelf of plain white and beige unlabeled products evenly spaced, kraft boxes stacked below, soft diffused light." },
+    { "id": "reel-start", "aspect_ratio": "9:16", "use": "first frame of the reel",
+      "prompt": "Top-down vertical view of hands resting on the lid of a closed kraft paper box on a light oak table, linen cloth to one side, soft morning light." }
+  ],
+  "reels": [
+    { "id": "reel-unboxing", "from": "reel-start", "model": "kling-video/v3.0/std/image-to-video",
+      "prompt": "Calm, slow, minimal Japanese lifestyle reel about trying a new product. Natural light, no text, no logos.",
+      "shots": [
+        { "prompt": "Hands slowly lift the lid of the kraft box, revealing a plain white jar and a frosted bottle in crinkled paper. Static top-down camera.", "duration": 4 },
+        { "prompt": "Close-up: a fingertip takes a little cream from the plain white jar and gently rubs it onto the back of the other hand by a bright window. Slow push-in.", "duration": 4 },
+        { "prompt": "A smartphone camera photographs the plain white bottle standing on folded linen; the screen shows the bottle. Gentle slow dolly.", "duration": 4 }
+      ]
+    }
+  ]
+}

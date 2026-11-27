@@ -12,8 +12,9 @@ import { CampaignSection } from "./CampaignSection";
 import { HowItWorks } from "./HowItWorks";
 import { BrandSection } from "./BrandSection";
 import { HomeFooter } from "./HomeFooter";
+import { notoJP, notoKR } from "./fonts";
 
-/** 홈(/). 섹션 순서는 여기서 조정합니다. */
+/** 홈(/) — 무인양품풍 미니멀. 섹션 순서는 여기서 조정합니다. */
 export function HomePage() {
   const [lang, setLang] = useState<Lang>("ko");
   const d = HOME[lang];
@@ -29,7 +30,7 @@ export function HomePage() {
   }, [lang]);
 
   return (
-    <div className={s.root}>
+    <div className={`${s.root} ${notoKR.variable} ${notoJP.variable}`} data-lang={lang}>
       <HomeNav d={d} lang={lang} setLang={setLang} />
       <main>
         <Hero d={d} lang={lang} />

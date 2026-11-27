@@ -2,7 +2,8 @@
 
 브랜드 × 인플루언서 매칭 서비스의 사전 신청 랜딩페이지와 프로토타입입니다. (화면 속 서비스명 `PICKLY`는 임시 이름)
 
-- **`/`**: 홈 (Apple 스타일). 대표 캠페인 갤러리, 카테고리 필터, 체험 카드, 이용 방법, 브랜드 안내. 내비의 '신청하기' 버튼이 항상 보임 (캠페인은 예시 데이터)
+- **`/`**: 홈 (무인양품풍 미니멀). 모집 중 캠페인, 카테고리 필터, 체험 카드, 이용 방법, 브랜드 안내. 상단의 '신청하기' 버튼이 항상 보임 (캠페인은 예시 데이터)
+- **`/studio`**: 팀 내부용. 인스타 캐러셀 PNG 만들기, 릴스 미리보기, 캡션 복사 (검색 노출 안 함)
 - **`/apply`**: 사전 신청 페이지 (한국어/일본어, 신청 폼, 샘플 게시물 하트·투표, 섹션 도달 지표). `?role=influencer&lang=ja`로 탭·언어 지정
 - **`/app`**: 브랜드 ↔ 인플루언서 매칭 프로토타입 (데이터는 브라우저 localStorage에만 저장)
 
@@ -60,6 +61,27 @@ scripts/
 
 - 운영: https://inplink.vercel.app
 - `main`은 보호 브랜치라 PR로만 변경됩니다.
+
+## SNS·웹 사진 만들기 (Higgsfield)
+
+1. https://console.higgsfield.ai 에서 API 키를 발급받아 `.env.local`에 넣습니다.
+
+   ```
+   HF_API_KEY=...
+   HF_API_SECRET=...
+   ```
+
+2. 생성합니다. 사진 10장(Soul V2)과 릴스 1개(Kling 3.0, 12초)가 만들어지고, 생성할 때마다 Higgsfield 크레딧이 차감됩니다.
+
+   ```bash
+   pnpm content:generate --dry-run   # 요청 내용만 확인 (크레딧 사용 안 함)
+   pnpm content:generate             # 전체 생성 (이미 있는 파일은 건너뜀)
+   pnpm content:generate --only cat-food,step-post --force   # 일부만 다시
+   ```
+
+3. 결과는 `public/content/`와 `src/lib/content/manifest.json`에 저장되고, 홈 사진이 자동으로 바뀝니다. `/studio`에서 캐러셀 PNG를 내려받고 릴스와 캡션을 확인합니다.
+
+프롬프트·화면 구성은 `scripts/higgsfield/plan.json`, 캐러셀·캡션 문구는 `src/lib/content/social.ts`에서 고칩니다.
 
 ## Google Sheets 연결 (약 5분)
 

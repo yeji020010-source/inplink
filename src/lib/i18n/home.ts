@@ -28,6 +28,9 @@ export type SampleCampaign = {
   brand: Record<Lang, string>;
 };
 
+/** 카테고리별 사진 (Higgsfield 생성 이미지 id, manifest.json 참고) */
+export const CATEGORY_IMAGE = { beauty: "cat-beauty", food: "cat-food", lifestyle: "cat-lifestyle" } as const;
+
 export const CAMPAIGNS: SampleCampaign[] = [
   { id: "c1", shape: "pump", tint: ["#eef3fb", "#d6e3f5"], category: "beauty", sns: "instagram", tags: ["free", "chance"], applicants: 412, daysLeft: 9, featured: true,
     title: { ko: "고보습 수분 크림", ja: "高保湿ウォータークリーム" }, brand: { ko: "글로우랩", ja: "グロウラボ" } },
@@ -52,21 +55,21 @@ export const CAMPAIGNS: SampleCampaign[] = [
 const ko = {
   nav: { campaigns: "체험", how: "이용 방법", brands: "브랜드", apply: "신청하기", menu: "메뉴 열기", close: "메뉴 닫기" },
   hero: {
-    eyebrow: "PICKLY · 사전 신청 중",
-    h1: "써보고 싶은 신제품,\n먼저 받아보세요.",
-    sub: "브랜드가 보내는 신제품을 무료로 체험하고, 솔직한 후기를 SNS에 나눠보세요.",
-    primary: "체험 신청하기",
-    secondary: "브랜드라면",
+    eyebrow: "사전 신청 중",
+    h1: "좋은 건,\n써보면 압니다.",
+    sub: "브랜드가 보내는 신제품을 먼저 써보고, 느낀 그대로를 나누는 곳.",
+    primary: "체험 신청",
+    secondary: "브랜드 문의",
   },
-  showcase: { title: "지금 모집 중.", sub: "이번 주 가장 많이 신청한 체험이에요.", pause: "자동 넘김 일시정지", play: "자동 넘김 재생", prev: "이전", next: "다음", slide: (i: number, n: number) => `${n}개 중 ${i}번째` },
-  list: { title: "모든 체험.", sub: "카테고리를 골라 나에게 맞는 체험을 찾아보세요.", filter: "카테고리", more: "더 보기", empty: "이 카테고리의 체험이 아직 없어요.", apply: "신청하기" },
+  showcase: { title: "지금 모집 중", sub: "이번 주 가장 많이 신청한 체험이에요.", pause: "자동 넘김 일시정지", play: "자동 넘김 재생", prev: "이전", next: "다음", slide: (i: number, n: number) => `${n}개 중 ${i}번째` },
+  list: { title: "체험 목록", sub: "카테고리를 골라 나에게 맞는 체험을 찾아보세요.", filter: "카테고리", more: "더 보기", empty: "이 카테고리의 체험이 아직 없어요.", apply: "신청하기" },
   cats: { all: "전체", new: "신착", beauty: "뷰티", food: "푸드", lifestyle: "라이프", instagram: "Instagram", x: "X" } as Record<CategoryKey, string>,
   tags: { free: "무료 제공", report: "리포트", newbie: "초보 환영", chance: "당첨률 UP" } as Record<TagKey, string>,
   people: (n: string) => `${n}명 신청`,
   daysLeft: (n: number) => `${n}일 남음`,
   newBadge: "New",
   how: {
-    title: "세 단계면 충분합니다.",
+    title: "이용 방법",
     steps: [
       ["신청", "마음에 드는 체험을 골라 신청해요. 팔로워 수가 적어도 괜찮아요."],
       ["제품 수령", "선정되면 제품이 무료로 집 앞까지 도착해요."],
@@ -75,7 +78,7 @@ const ko = {
   },
   brand: {
     eyebrow: "브랜드를 위한 PICKLY",
-    title: "제품은 인플루언서에게.\n반응은 리포트로.",
+    title: "제품을,\n써볼 사람에게.",
     body: "제품을 등록하면 어울리는 인플루언서를 연결하고, 게시물 반응과 피드백을 정리해 전달해 드려요.",
     cta: "브랜드로 사전 신청",
   },
@@ -95,21 +98,21 @@ export type HomeDict = typeof ko;
 const ja: HomeDict = {
   nav: { campaigns: "体験", how: "ご利用方法", brands: "ブランド", apply: "応募する", menu: "メニューを開く", close: "メニューを閉じる" },
   hero: {
-    eyebrow: "PICKLY · 事前登録受付中",
-    h1: "使ってみたい新商品を、\nいち早く。",
-    sub: "ブランドから届く新商品を無料で体験して、正直な感想をSNSでシェアしよう。",
-    primary: "体験に応募する",
+    eyebrow: "事前登録受付中",
+    h1: "いいものは、\n使えばわかる。",
+    sub: "ブランドから届く新商品を先に使って、感じたままをシェアする場所。",
+    primary: "体験に応募",
     secondary: "ブランドの方へ",
   },
-  showcase: { title: "いま募集中。", sub: "今週いちばん応募が多い体験です。", pause: "自動切り替えを一時停止", play: "自動切り替えを再生", prev: "前へ", next: "次へ", slide: (i: number, n: number) => `${n}件中${i}件目` },
-  list: { title: "すべての体験。", sub: "カテゴリを選んで、自分にぴったりの体験を見つけよう。", filter: "カテゴリ", more: "もっと見る", empty: "このカテゴリの体験はまだありません。", apply: "応募する" },
+  showcase: { title: "いま募集中", sub: "今週いちばん応募が多い体験です。", pause: "自動切り替えを一時停止", play: "自動切り替えを再生", prev: "前へ", next: "次へ", slide: (i: number, n: number) => `${n}件中${i}件目` },
+  list: { title: "体験一覧", sub: "カテゴリを選んで、自分にぴったりの体験を見つけよう。", filter: "カテゴリ", more: "もっと見る", empty: "このカテゴリの体験はまだありません。", apply: "応募する" },
   cats: { all: "すべて", new: "新着", beauty: "コスメ", food: "フード", lifestyle: "ライフ", instagram: "Instagram", x: "X" },
   tags: { free: "無料提供", report: "レポート", newbie: "初心者歓迎", chance: "当選確率UP" },
   people: (n: string) => `${n}人が応募`,
   daysLeft: (n: number) => `残り${n}日`,
   newBadge: "New",
   how: {
-    title: "3ステップで、かんたん。",
+    title: "ご利用方法",
     steps: [
       ["応募", "気になる体験を選んで応募。フォロワーが少なくても大丈夫。"],
       ["商品を受け取る", "当選すると商品が無料でご自宅に届きます。"],
@@ -118,7 +121,7 @@ const ja: HomeDict = {
   },
   brand: {
     eyebrow: "ブランドのためのPICKLY",
-    title: "商品はインフルエンサーへ。\n反応はレポートで。",
+    title: "商品を、\n使う人のもとへ。",
     body: "商品を登録すると、ぴったりのインフルエンサーをご紹介。投稿の反応やフィードバックをまとめてお届けします。",
     cta: "ブランドとして事前登録",
   },

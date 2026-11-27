@@ -30,13 +30,13 @@ export function CampaignSection({ d, lang }: { d: HomeDict; lang: Lang }) {
   };
 
   return (
-    <section id="campaigns" className={`${s.section} ${s.listSection}`}>
-      <Reveal className={s.sectionHead}>
+    <section id="campaigns" className={`${s.section} ${s.paper}`}>
+      <Reveal className={s.head}>
         <h2 className={s.h2}>{d.list.title}</h2>
         <p className={s.lead}>{d.list.sub}</p>
       </Reveal>
-      <div className={s.segmentWrap}>
-        <div className={s.segment} role="group" aria-label={d.list.filter}>
+      <div className={s.tabsWrap}>
+        <div className={s.tabs} role="group" aria-label={d.list.filter}>
           {CATS.map((c) => (
             <button key={c} aria-pressed={cat === c} onClick={() => pick(c)}>
               {d.cats[c]}
@@ -60,7 +60,7 @@ export function CampaignSection({ d, lang }: { d: HomeDict; lang: Lang }) {
       )}
       {!expanded && list.length > PAGE && (
         <div className={s.center}>
-          <button className={s.pillGhost} onClick={() => setExpanded(true)}>
+          <button className={s.btnLine} onClick={() => setExpanded(true)}>
             {d.list.more}
           </button>
         </div>

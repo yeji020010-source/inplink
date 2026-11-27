@@ -3,19 +3,16 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import s from "./home.module.css";
-import { CAMPAIGNS, type HomeDict } from "@/lib/i18n/home";
+import { CAMPAIGNS, CATEGORY_IMAGE, type HomeDict } from "@/lib/i18n/home";
 import type { Lang } from "@/lib/i18n/landing";
 import { ChevronLeft, ChevronRight, Pause, Play } from "./icons";
-import { ProductArt } from "./ProductArt";
+import { Photo } from "./Photo";
 import { Reveal } from "./Reveal";
 
 const FEATURED = CAMPAIGNS.filter((c) => c.featured);
 const INTERVAL = 6000;
 
-/**
- * 대표 캠페인 갤러리: 가로 스크롤 + 스냅.
- * 자동 넘김은 일시정지 버튼으로 멈출 수 있고, 마우스 오버·키보드 포커스·reduced-motion 일 때도 멈춥니다.
- */
+/** 모집 중 캠페인: 가로 스크롤. 자동 넘김은 일시정지 가능, 호버·포커스·reduced-motion 시 정지. */
 export function Showcase({ d, lang }: { d: HomeDict; lang: Lang }) {
   const track = useRef<HTMLDivElement>(null);
   const [i, setI] = useState(0);
@@ -35,13 +32,14 @@ export function Showcase({ d, lang }: { d: HomeDict; lang: Lang }) {
     el.scrollTo({ left: slide.offsetLeft - el.offsetLeft, behavior: "smooth" });
   }, []);
 
-  // 스크롤 위치로 현재 슬라이드 계산 (스와이프 대응)
   useEffect(() => {
     const el = track.current;
     if (!el) return;
     const onScroll = () => {
-      const w = (el.children[0] as HTMLElement).offsetWidth;
-      setI(Math.round(el.scrollLeft / (w + 20)));
+      const first = el.children[0] as HTMLElement;
+      const second = el.children[1] as HTMLElement | undefined;
+      const step = second ? second.offsetLeft - first.offsetLeft : first.offsetWidth;
+      setI(Math.min(FEATURED.length - 1, Math.round(el.scrollLeft / step)));
     };
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
@@ -54,14 +52,14 @@ export function Showcase({ d, lang }: { d: HomeDict; lang: Lang }) {
   }, [i, playing, hold, go]);
 
   return (
-    <section className={s.showcase} aria-roledescription="carousel" aria-label={d.showcase.title}>
-      <Reveal className={s.sectionHead}>
+    <section className={s.section} aria-roledescription="carousel" aria-label={d.showcase.title}>
+      <Reveal className={s.head}>
         <h2 className={s.h2}>{d.showcase.title}</h2>
         <p className={s.lead}>{d.showcase.sub}</p>
       </Reveal>
       <div
         ref={track}
-        className={s.gallery}
+        className={s.rail}
         onMouseEnter={() => setHold(true)}
         onMouseLeave={() => setHold(false)}
         onFocus={() => setHold(true)}
@@ -71,24 +69,25 @@ export function Showcase({ d, lang }: { d: HomeDict; lang: Lang }) {
           <Link
             key={c.id}
             href={`/apply?role=influencer&lang=${lang}`}
-            className={s.slide}
-            style={{ background: `linear-gradient(160deg, ${c.tint[0]}, ${c.tint[1]})` }}
+            className={s.railItem}
             aria-roledescription="slide"
             aria-label={`${d.showcase.slide(k + 1, FEATURED.length)}: ${c.brand[lang]} ${c.title[lang]}`}
           >
-            <span className={s.slideText}>
-              <span className={s.slideTag}>{d.tags[c.tags[0]]}</span>
-              <span className={s.slideTitle}>{c.title[lang]}</span>
-              <span className={s.slideBrand}>{c.brand[lang]}</span>
+            <Photo id={CATEGORY_IMAGE[c.category]} fallback={c.shape} alt="" sizes="(max-width: 734px) 80vw, 40vw" className={s.railPhoto} />
+            <span className={s.railIndex}>
+              {String(k + 1).padStart(2, "0")} / {String(FEATURED.length).padStart(2, "0")}
             </span>
-            <ProductArt shape={c.shape} className={s.slideArt} />
+            <span className={s.railTitle}>{c.title[lang]}</span>
+            <span className={s.railBrand}>
+              {c.brand[lang]} · {d.tags[c.tags[0]]}
+            </span>
           </Link>
         ))}
       </div>
-      <div className={s.galleryControls}>
-        <div className={s.dots} role="group" aria-label={d.showcase.title}>
+      <div className={s.controls}>
+        <div className={s.progress} role="group" aria-label={d.showcase.title}>
           {FEATURED.map((c, k) => (
-            <button key={c.id} className={s.dot} aria-current={k === i} aria-label={d.showcase.slide(k + 1, FEATURED.length)} onClick={() => go(k)} />
+            <button key={c.id} className={s.tick} aria-current={k === i} aria-label={d.showcase.slide(k + 1, FEATURED.length)} onClick={() => go(k)} />
           ))}
         </div>
         <div className={s.paddles}>

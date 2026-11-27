@@ -3,7 +3,7 @@ import s from "./home.module.css";
 import type { HomeDict } from "@/lib/i18n/home";
 import type { Lang } from "@/lib/i18n/landing";
 
-/** 푸터 링크 대상 (cols 순서와 같음). 아직 없는 페이지(약관 등)는 null → 텍스트로만 표시 */
+/** 푸터 링크 대상 (cols 순서와 같음). 아직 없는 페이지는 null → 텍스트로만 표시 */
 const hrefs = (lang: Lang): (string | null)[][] => [
   ["#campaigns", "#how", "#brands"],
   [`/apply?role=influencer&lang=${lang}`, `/apply?role=brand&lang=${lang}`],
@@ -15,7 +15,7 @@ export function HomeFooter({ d, lang }: { d: HomeDict; lang: Lang }) {
   return (
     <footer className={s.footer}>
       <div className={s.footerInner}>
-        <p className={s.footNote}>{d.footer.note}</p>
+        <p className={s.footWord}>PICKLY</p>
         <div className={s.footCols}>
           {d.footer.cols.map(([head, items], ci) => (
             <div key={head}>
@@ -29,6 +29,7 @@ export function HomeFooter({ d, lang }: { d: HomeDict; lang: Lang }) {
             </div>
           ))}
         </div>
+        <p className={s.footNote}>{d.footer.note}</p>
         <p className={s.copy}>{d.footer.copy}</p>
       </div>
     </footer>
